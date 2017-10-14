@@ -4,6 +4,7 @@ import * as gulp from 'gulp'
 import * as plumber from 'gulp-plumber'
 import * as mustache from 'gulp-mustache'
 import * as rename from 'gulp-rename'
+import * as zip from 'gulp-zip'
 
 import * as del from 'del'
 import * as runSequence from 'run-sequence'
@@ -57,6 +58,36 @@ gulp.task('manifest-watch', () => {
 })
 
 
+// ----- zip ------------------------------------------------------------------
+
+gulp.task('zip', ['zip.archive', 'zip.source'])
+
+gulp.task('zip.archive', () =>
+  gulp.src('dist/**/*')
+    .pipe(zip('archive.zip'))
+    .pipe(gulp.dest('.'))
+)
+
+gulp.task('zip.source', () =>
+  gulp.src([
+    'assets/**/*',
+    'src/**/*',
+    'test/**/*',
+    '.node-version',
+    '.editorconfig',
+    '.gitignore',
+    '*.js',
+    '*.json',
+    '*.yml',
+    '*.md',
+    'yarn.lock',
+    'LICENSE',
+  ], { base: '.' })
+    .pipe(zip('source.zip'))
+    .pipe(gulp.dest('.'))
+)
+
+
 // ----- for production -------------------------------------------------------
 
 gulp.task('build-prod', cb => {
@@ -67,7 +98,7 @@ gulp.task('build-prod', cb => {
       'manifest',
       // 'webpack-prod',
     ],
-    // 'zip',
+    'zip',
     cb
   )
 })
