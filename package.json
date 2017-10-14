@@ -1,0 +1,28 @@
+{
+  "name": "fantastic-star-clicker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "@types/del": "^3.0.0",
+    "@types/gulp": "^3.8.33",
+    "@types/gulp-mustache": "^3.0.0",
+    "@types/gulp-plumber": "^0.0.31",
+    "@types/gulp-rename": "^0.0.32",
+    "@types/node": "^8.0.34",
+    "@types/run-sequence": "^0.0.29",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-mustache": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "run-sequence": "^2.2.0",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.3"
+  },
+  "repository": "git@github.com:pine/FantasticStarClicker.git",
+  "author": "Pine Mizune <pinemz@gmail.com>",
+  "license": "MIT"
+}
