@@ -4,6 +4,8 @@ import * as gulp from 'gulp'
 import * as plumber from 'gulp-plumber'
 import * as mustache from 'gulp-mustache'
 import * as rename from 'gulp-rename'
+import * as _if from 'gulp-if'
+import * as jsonminify from 'gulp-jsonminify'
 import * as zip from 'gulp-zip'
 
 import * as del from 'del'
@@ -49,7 +51,7 @@ gulp.task('manifest', () =>
       version: pkg.version,
     }))
     .pipe(rename({ extname: '' }))
-    // .pipe($.if(!isWatch, $.jsonminify()))
+    .pipe(_if(!isWatch, jsonminify()))
     .pipe(gulp.dest('./dist'))
 )
 

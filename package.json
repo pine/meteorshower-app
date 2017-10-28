@@ -8,6 +8,8 @@
   "devDependencies": {
     "@types/del": "^3.0.0",
     "@types/gulp": "^3.8.33",
+    "@types/gulp-if": "^0.0.32",
+    "@types/gulp-jsonminify": "^1.0.0",
     "@types/gulp-mustache": "^3.0.0",
     "@types/gulp-plumber": "^0.0.31",
     "@types/gulp-rename": "^0.0.32",
@@ -16,6 +18,8 @@
     "@types/run-sequence": "^0.0.29",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-if": "^2.0.2",
+    "gulp-jsonminify": "^1.0.0",
     "gulp-mustache": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
