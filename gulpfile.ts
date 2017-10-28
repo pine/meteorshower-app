@@ -37,7 +37,7 @@ gulp.task('assets-watch', () =>
 
 gulp.task('clean', cb => {
   del(['dist', '*.zip'])
-    .then(()=> cb())
+    .then(() => cb())
     .catch(err => cb(err))
 })
 
