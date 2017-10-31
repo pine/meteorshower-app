@@ -1,6 +1,8 @@
 import * as fs from 'fs'
+import { exec } from 'child_process'
 
 import * as gulp from 'gulp'
+import * as gutil from 'gulp-util'
 import * as plumber from 'gulp-plumber'
 import * as mustache from 'gulp-mustache'
 import * as rename from 'gulp-rename'
@@ -10,6 +12,7 @@ import * as zip from 'gulp-zip'
 
 import * as del from 'del'
 import * as runSequence from 'run-sequence'
+import * as _ from 'lodash'
 
 
 // ---------------------------------------------------------------------------
@@ -70,6 +73,37 @@ gulp.task('tslint', () =>
 )
 
 
+// ----- webpack --------------------------------------------------------------
+
+function runWebpack(opts: string[], cb: (arg: any) => any) {
+  const defaults = [
+    '--colors',
+    '--display-chunks',
+  ]
+  if (!process.env.CI) {
+    defaults.push('--progress')
+  }
+  opts = _.union(opts, defaults)
+
+  const message = 'Run webpack with options `' + opts.join(' ') + '`'
+  gutil.log(message)
+
+  const cmd = 'webpack ' + opts.join(' ')
+  const child = exec(cmd, cb)
+  child.stdout.on('data', data => process.stdout.write(data))
+  child.stderr.on('data', data => process.stderr.write(data))
+}
+
+
+gulp.task('webpack-prod', cb => {
+  runWebpack([], cb)
+})
+
+gulp.task('webpack-watch', cb => {
+  runWebpack(['--watch'], cb)
+})
+
+
 // ----- zip ------------------------------------------------------------------
 
 gulp.task('zip', ['zip.archive', 'zip.source'])
@@ -108,7 +142,7 @@ gulp.task('build-prod', cb => {
     [
       'assets',
       'manifest',
-      // 'webpack-prod',
+      'webpack-prod',
     ],
     'zip',
     cb
@@ -116,3 +150,35 @@ gulp.task('build-prod', cb => {
 })
 
 gulp.task('default', ['build-prod'])
+
+
+// ----- for development ------------------------------------------------------
+
+gulp.task('build-watch', cb => {
+  runSequence(
+    [
+      'assets',
+      'manifest',
+    ],
+    cb
+  )
+})
+
+gulp.task('watch', cb => {
+  runSequence(
+    'clean',
+    [
+      'build-watch',
+    ],
+    [
+      'assets-watch',
+      'manifest-watch',
+      'webpack-watch',
+    ],
+    cb
+  )
+})
+
+
+
+// vim: se et ts=2 sw=2 sts=2 ft=typescript :
