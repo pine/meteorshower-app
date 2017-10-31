@@ -60,6 +60,16 @@ gulp.task('manifest-watch', () => {
 })
 
 
+// ----- tslint ---------------------------------------------------------------
+
+gulp.task('tslint', () =>
+  gulp.src('src/**/*.ts')
+    .pipe(plumber())
+    // .pipe(tslint({ formatter: 'prose' }))
+    // .pipe(tslint.report({ summarizeFailureOutput: true }))
+)
+
+
 // ----- zip ------------------------------------------------------------------
 
 gulp.task('zip', ['zip.archive', 'zip.source'])
