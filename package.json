@@ -6,7 +6,10 @@
     "build": "gulp",
     "start": "gulp watch"
   },
+  "dependencies": {
+  },
   "devDependencies": {
+    "@types/chrome": "^0.0.52",
     "@types/del": "^3.0.0",
     "@types/gulp": "^3.8.33",
     "@types/gulp-if": "^0.0.32",
