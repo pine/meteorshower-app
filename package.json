@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "watch": "gulp watch"
+    "start": "gulp watch"
   },
   "devDependencies": {
     "@types/del": "^3.0.0",

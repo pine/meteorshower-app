@@ -1,2 +1,27 @@
 {
+  "name": "Fantastic Star Clicker",
+  "description": "",
+  "author": "Pine Mizune",
+  "icons": {},
+  "version": "{{version}}",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+    	"*://github.com/*"
+      ],
+      "css": [
+      ],
+      "js": [
+		"content_scripts.bundle.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "*://github.com/*"
+  ],
+  "web_accessible_resources": [
+  ]
 }
