@@ -2,6 +2,9 @@ import * as webpack from 'webpack'
 
 const isWatch = process.argv.indexOf('--watch') > -1
 const plugins = [
+  new webpack.DefinePlugin({
+    DEBUG: JSON.stringify(isWatch),
+  }),
   new webpack.NormalModuleReplacementPlugin(
     /sinon/,
     `${__dirname}/node_modules/sinon/pkg/sinon.js`
@@ -23,6 +26,7 @@ if (!isWatch) {
 const configuration: webpack.Configuration = {
   context: __dirname,
   entry: {
+    'background': './src/background',
     'content_scripts': './src/content_scripts',
   },
   output: {

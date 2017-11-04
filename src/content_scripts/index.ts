@@ -14,6 +14,14 @@ function putStar() {
   }
 }
 
-putStar()
+function main() {
+  if (DEBUG) {
+    console.log('Start content scripts')
+  }
+
+  putStar()
+}
+
+export = main()
 
 // vim: se et ts=2 sw=2 sts=2 ft=typescript :
