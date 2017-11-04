@@ -4,7 +4,7 @@ import { FSC_LOAD_CONFIG } from '../event'
 
 function main() {
   if (DEBUG) {
-    console.log('Start background scripts')
+    console.log('Background scripts started')
   }
 
   chrome.runtime.onMessage.addListener(

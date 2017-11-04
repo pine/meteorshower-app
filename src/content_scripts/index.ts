@@ -50,7 +50,7 @@ function findMatchedPattern(
 
 async function main() {
   if (DEBUG) {
-    console.log('The content scripts started')
+    console.log('Content scripts started')
   }
 
   const config = await loadConfig()
