@@ -28,6 +28,7 @@ const configuration: webpack.Configuration = {
   entry: {
     'background': './src/background',
     'content_scripts': './src/content_scripts',
+    'options_page': './src/options_page',
   },
   output: {
     filename: './dist/[name].bundle.js',
