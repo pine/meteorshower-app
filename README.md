@@ -10,7 +10,8 @@ $ git clone https://github.com/pine/FantasticStarClicker.git
 $ cd FantasticStarClicker
 
 $ yarn
-$ yarn run build
+$ yarn start     # for development
+$ yarn run build # for production
 ```
 
 ## License
