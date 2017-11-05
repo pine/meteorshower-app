@@ -50,5 +50,6 @@
   },
   "repository": "git@github.com:pine/FantasticStarClicker.git",
   "author": "Pine Mizune <pinemz@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true
 }
