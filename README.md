@@ -1,12 +1,12 @@
-Fantastic Star Clicker
-----------------------
+Meteor Shower ☆彡
+-----------------
 
 :volcano: Do you remember all the repositories saw in the past?
 
 ## Getting started
 
 ```
-$ git clone https://github.com/pine/FantasticStarClicker.git
+$ git clone https://github.com/pine/MeteorShower.git
 $ cd FantasticStarClicker
 
 $ yarn
