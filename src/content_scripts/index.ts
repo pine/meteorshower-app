@@ -1,6 +1,11 @@
 'use strict'
 
-import { FSC_LOAD_CONFIG } from '../event'
+import { Pattern, loadConfigFromBackground } from '../config'
+
+interface Repository {
+  owner: string
+  name: string
+}
 
 function checkStar() : boolean {
   const starred = document.querySelector('.starring-container .starred')
@@ -26,18 +31,10 @@ function getRepository() : Repository | null {
   return matches ? { owner: matches[1], name: matches[2] } : null
 }
 
-async function loadConfig() : Promise<Configuration> {
-  return new Promise<Configuration>((resolve, reject) => {
-    chrome.runtime.sendMessage({ type: FSC_LOAD_CONFIG }, (response: any) => {
-      resolve(response)
-    })
-  })
-}
-
 function findMatchedPattern(
   repository: Repository,
-  patterns: ExcludedPattern[]
-) : ExcludedPattern | null {
+  patterns: Pattern.T[]
+) : Pattern.T | null {
   for (const pattern of patterns) {
     if (pattern.owner === repository.owner) {
       if (!pattern.name || pattern.name === repository.name) {
@@ -53,7 +50,7 @@ async function main() {
     console.log('Content scripts started')
   }
 
-  const config = await loadConfig()
+  const config = await loadConfigFromBackground()
   if (DEBUG) {
     console.log('The config loaded', config)
   }
@@ -78,5 +75,3 @@ async function main() {
 }
 
 export = main()
-
-// vim: se et ts=2 sw=2 sts=2 ft=typescript :

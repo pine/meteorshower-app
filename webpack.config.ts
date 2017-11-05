@@ -1,3 +1,4 @@
+import { join } from 'path'
 import * as webpack from 'webpack'
 
 const isWatch = process.argv.indexOf('--watch') > -1
@@ -31,12 +32,14 @@ const configuration: webpack.Configuration = {
     'options_page': './src/options_page',
   },
   output: {
-    filename: './dist/[name].bundle.js',
+    path: join(__dirname, 'dist'),
+    filename: '[name].bundle.js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
     alias: {
       'sinon': 'sinon/pkg/sinon',
+      'vue': 'vue/dist/vue.esm.js',
     },
   },
   module: {
@@ -54,6 +57,36 @@ const configuration: webpack.Configuration = {
         test: /\.json$/,
         use: 'json-loader',
       },
+      {
+        test: /\.css/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
+      },
+      {
+        test: /\.scss/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
+      },
+      {
+        test: /\.html/,
+        use: 'html-loader',
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
+        loader: 'file-loader',
+        query: {
+          name: '[name].[ext]?[hash]'
+        },
+      }
     ],
   },
   plugins,

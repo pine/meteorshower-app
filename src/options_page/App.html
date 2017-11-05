@@ -1,0 +1,53 @@
+<el-container class="App">
+  <el-header>
+    <h1>設定 - 除外レポジトリ</h1>
+    <p>スター自動付与から除外するレポジトリを指定できます。</p>
+	</el-header>
+
+  <el-main>
+    <p>所有者はアカウント名か組織名を指定します。レポジトリ名を空にすると、その所有者のすべてのレポジトリ名が除外されます。</p>
+
+		<el-form ref="patternForm" :inline="true" :model="pattern" :rules="rules" class="demo-form-inline">
+			<el-form-item label="所有者" prop="owner">
+				<el-input type="text" v-model="pattern.owner" placeholder="owner"></el-input>
+			</el-form-item>
+			<el-form-item label="レポジトリ名 (任意)" prop="name">
+				<el-input v-model="pattern.name" placeholder="name"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="submitForm('patternForm')">追加</el-button>
+			</el-form-item>
+		</el-form>
+
+    <el-table
+      :data="patterns"
+      stripe
+      >
+      <el-table-column
+        type="index"
+        label="#">
+      </el-table-column>
+
+      <el-table-column
+        prop="owner"
+        label="所有者"
+        width="180">
+      </el-table-column>
+
+      <el-table-column
+        prop="name"
+        label="レポジトリ名">
+      </el-table-column>
+
+      <el-table-column
+        label="削除">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">削除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </el-main>
+</el-container>

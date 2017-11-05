@@ -27,8 +27,11 @@
   ],
   "options_page": "options_page.html",
   "permissions": [
+    "storage",
+    "unlimitedStorage",
     "*://github.com/*"
   ],
   "web_accessible_resources": [
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
