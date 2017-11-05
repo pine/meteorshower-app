@@ -49,7 +49,11 @@
     "webpack": "^3.8.1"
   },
   "repository": "git@github.com:pine/FantasticStarClicker.git",
-  "author": "Pine Mizune <pinemz@gmail.com>",
+  "author": {
+    "name": "Pine Mizune",
+    "email": "pinemz@gmail.com",
+    "url": "https://github.com/pine"
+  },
   "license": "MIT",
   "private": true
 }
