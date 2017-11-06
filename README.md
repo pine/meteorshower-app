@@ -1,7 +1,7 @@
 Meteor Shower ☆彡
 -----------------
 
-:volcano: Do you remember all the repositories saw in the past?
+:star2: Do you remember all the repositories saw in the past?
 
 ## Getting started
 
