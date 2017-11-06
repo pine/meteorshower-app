@@ -1,5 +1,5 @@
 {
-  "name": "fantastic-star-clicker",
+  "name": "meteor-shower",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
@@ -48,7 +48,7 @@
     "typescript": "^2.5.3",
     "webpack": "^3.8.1"
   },
-  "repository": "git@github.com:pine/FantasticStarClicker.git",
+  "repository": "git@github.com:pine/MeteorShower.git",
   "author": {
     "name": "Pine Mizune",
     "email": "pinemz@gmail.com",
