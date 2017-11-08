@@ -12,7 +12,7 @@ Meteor Shower ☆彡
 
 ```
 $ git clone https://github.com/pine/MeteorShower.git
-$ cd FantasticStarClicker
+$ cd MeteorShower
 
 $ yarn
 $ yarn start     # for development
