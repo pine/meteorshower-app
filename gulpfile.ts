@@ -9,6 +9,7 @@ import * as rename from 'gulp-rename'
 import * as _if from 'gulp-if'
 import * as jsonminify from 'gulp-jsonminify'
 import * as zip from 'gulp-zip'
+import tslint from 'gulp-tslint'
 
 import * as del from 'del'
 import * as runSequence from 'run-sequence'
@@ -68,8 +69,8 @@ gulp.task('manifest-watch', () => {
 gulp.task('tslint', () =>
   gulp.src('src/**/*.ts')
     .pipe(plumber())
-    // .pipe(tslint({ formatter: 'prose' }))
-    // .pipe(tslint.report({ summarizeFailureOutput: true }))
+    .pipe(tslint({ formatter: 'prose' }))
+    .pipe(tslint.report({ summarizeFailureOutput: true }))
 )
 
 
