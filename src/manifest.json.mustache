@@ -21,7 +21,8 @@
   "content_scripts": [
     {
       "matches": [
-    	"*://github.com/*"
+    	"*://github.com/*",
+        "*://gist.github.com/*"
       ],
       "css": [
       ],
@@ -36,7 +37,8 @@
   "permissions": [
     "storage",
     "unlimitedStorage",
-    "*://github.com/*"
+    "*://github.com/*",
+    "*://gist.github.com/*"
   ],
   "web_accessible_resources": [
   ],

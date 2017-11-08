@@ -26,7 +26,7 @@ function checkStar() : boolean {
 }
 
 function getRepository() : Repository | null {
-  const pattern = /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)/
+  const pattern = /^https:\/\/(?:gist\.)?github\.com\/([^\/]+)\/([^\/]+)/
   const matches = pattern.exec(location.href)
   return matches ? { owner: matches[1], name: matches[2] } : null
 }
