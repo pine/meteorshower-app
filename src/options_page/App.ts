@@ -46,6 +46,10 @@ export default class AppComponent extends Vue {
       if (DEBUG) {
         console.log('saved', this.config)
       }
+
+      const input = <ElementUI.Input>this.$refs['owner']
+      const elem = input.$el.querySelector('input')
+      if (elem) elem.focus()
     })
   }
 
