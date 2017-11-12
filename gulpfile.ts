@@ -181,5 +181,9 @@ gulp.task('watch', cb => {
 })
 
 
+// ----- for test -------------------------------------------------------------
+
+gulp.task('test', ['tslint'])
+
 
 // vim: se et ts=2 sw=2 sts=2 ft=typescript :

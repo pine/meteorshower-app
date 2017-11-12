@@ -19,5 +19,11 @@ $ yarn start     # for development
 $ yarn run build # for production
 ```
 
+## Test
+
+```
+$ yarn test
+```
+
 ## License
 MIT &copy; Pine Mizune
