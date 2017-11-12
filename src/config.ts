@@ -4,7 +4,7 @@ import {
 } from './event'
 
 export module Configuration {
-  export declare type T = {
+  export declare interface T {
     exclude: Pattern.T[]
   }
 
@@ -29,7 +29,7 @@ export module Pattern {
   }
 }
 
-export async function loadConfigFromBackground() : Promise<Configuration.T> {
+export async function loadConfigFromBackground(): Promise<Configuration.T> {
   return new Promise<Configuration.T>((resolve, reject) => {
     chrome.runtime.sendMessage({ type: FSC_LOAD_CONFIG }, (response: any) => {
       resolve(response)
@@ -37,7 +37,7 @@ export async function loadConfigFromBackground() : Promise<Configuration.T> {
   })
 }
 
-export async function saveConfigForBackground(config: Configuration.T) : Promise<void> {
+export async function saveConfigForBackground(config: Configuration.T): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     chrome.runtime.sendMessage({ type: FSC_SAVE_CONFIG, args: [config] }, (response: any) => {
       resolve()
