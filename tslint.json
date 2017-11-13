@@ -1,16 +1,21 @@
 {
   "extends": "tslint:latest",
   "rules": {
-    "semicolon": false,
-    "quotemark": [true, "single"],
+    "arrow-parens": false,
+    "trailing-comma": [true, {
+      "multiline": {
+        "functions": "never"
+      }
+    }],
+    "curly": [true, "ignore-same-line"],
     "no-console": false,
     "no-namespace": false,
-    "no-unused-expressions": false,
+    "no-string-throw": false,
     "interface-name": false,
-    "arrow-parens": false,
     "one-line": false,
+    "quotemark": [true, "single"],
+    "semicolon": false,
     "switch-default": false,
-    "variable-name": [true, "allow-leading-underscore"],
-    "no-string-throw": false
+    "variable-name": [true, "allow-leading-underscore"]
   }
 }

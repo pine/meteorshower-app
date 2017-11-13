@@ -41,7 +41,7 @@ function main() {
         case FSC_SAVE_CONFIG:
           return saveConfig(request.args[0], sendResponse)
       }
-    },
+    }
   )
 }
 

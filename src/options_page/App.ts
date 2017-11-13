@@ -1,13 +1,13 @@
 'use strict'
 
+import ElementUI from 'element-ui'
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import ElementUI from 'element-ui'
 
 import {
   Configuration,
-  Pattern,
   loadConfigFromBackground,
+  Pattern,
   saveConfigForBackground,
 } from '../config'
 
@@ -19,27 +19,27 @@ import './App.scss'
   template: require('./App.html'),
 })
 export default class AppComponent extends Vue {
-  rules = {
+  public rules = {
     owner: [
       { required: true, message: '所有者は必ず指定してください。', trigger: 'change' },
-    ]
+    ],
   }
 
-  config = Configuration.empty()
-  pattern = Pattern.empty()
-  patterns: Pattern.T[] = []
+  public config = Configuration.empty()
+  public pattern = Pattern.empty()
+  public patterns: Pattern.T[] = []
 
-  async mounted() {
+  public async mounted() {
     this.config = await loadConfigFromBackground()
     this.patterns = this.config.exclude
   }
 
-  submitForm(formName: string) {
-    const form = <ElementUI.Form>this.$refs[formName]
+  public submitForm(formName: string) {
+    const form = this.$refs[formName] as ElementUI.Form
     form.validate(async valid => {
       if (!valid) return false
 
-      this.patterns.push(Object.assign({}, this.pattern))
+      this.patterns.push({ ...this.pattern })
       form.resetFields()
 
       await saveConfigForBackground(this.config)
@@ -47,13 +47,13 @@ export default class AppComponent extends Vue {
         console.log('saved', this.config)
       }
 
-      const input = <ElementUI.Input>this.$refs['owner']
+      const input = this.$refs.owner as ElementUI.Input
       const elem = input.$el.querySelector('input')
       if (elem) elem.focus()
     })
   }
 
-  async handleDelete(index: number) {
+  public async handleDelete(index: number) {
     this.patterns.splice(index, 1)
 
     await saveConfigForBackground(this.config)

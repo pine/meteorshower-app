@@ -1,4 +1,5 @@
 'use strict'
+/* tslint:disable no-submodule-imports no-var-requires */
 
 import Vue from 'vue'
 

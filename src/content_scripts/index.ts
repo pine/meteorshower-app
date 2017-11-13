@@ -1,13 +1,13 @@
 'use strict'
 
-import { Pattern, loadConfigFromBackground } from '../config'
+import { loadConfigFromBackground, Pattern } from '../config'
 
 interface Repository {
   owner: string
   name: string
 }
 
-function checkStar() : boolean {
+function checkStar(): boolean {
   const starred = document.querySelector('.starring-container .starred')
   const unstarred = document.querySelector('.starring-container .unstarred')
   if (!starred || !unstarred) return false
@@ -25,7 +25,7 @@ function checkStar() : boolean {
   return false
 }
 
-function getRepository() : Repository | null {
+function getRepository(): Repository | null {
   const pattern = /^https:\/\/(?:gist\.)?github\.com\/([^\/]+)\/([^\/]+)/
   const matches = pattern.exec(location.href)
   return matches ? { owner: matches[1], name: matches[2] } : null
@@ -34,7 +34,7 @@ function getRepository() : Repository | null {
 function findMatchedPattern(
   repository: Repository,
   patterns: Pattern.T[]
-) : Pattern.T | null {
+): Pattern.T | null {
   for (const pattern of patterns) {
     if (pattern.owner === repository.owner) {
       if (!pattern.name || pattern.name === repository.name) {

@@ -3,7 +3,7 @@ import {
   FSC_SAVE_CONFIG,
 } from './event'
 
-export module Configuration {
+export namespace Configuration {
   export declare interface T {
     exclude: Pattern.T[]
   }
@@ -15,16 +15,16 @@ export module Configuration {
   }
 }
 
-export module Pattern {
-  export declare type T = {
-    owner: string
+export namespace Pattern {
+  export declare interface T {
     name: string
+    owner: string
   }
 
   export function empty(): T {
     return {
-      owner: '',
       name: '',
+      owner: '',
     }
   }
 }
