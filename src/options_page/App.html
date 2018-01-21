@@ -1,10 +1,11 @@
 <el-container class="App">
   <el-header>
-    <h1>設定 - 除外レポジトリ</h1>
+    <h1>設定</h1>
     <p>スター自動付与から除外するレポジトリを指定できます。</p>
   </el-header>
 
   <el-main>
+    <h2>除外レポジトリ</h2>
     <p>所有者はアカウント名か組織名を指定します。レポジトリ名を空にすると、その所有者のすべてのレポジトリ名が除外されます。</p>
 
     <el-form ref="patternForm" :inline="true" :model="pattern" :rules="rules" class="demo-form-inline">
@@ -21,6 +22,7 @@
 
     <el-table
       :data="patterns"
+      empty-text="除外レポジトリが設定されていません。"
       stripe
       >
       <el-table-column
