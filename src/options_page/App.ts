@@ -44,6 +44,7 @@ export default class AppComponent extends Vue {
     this.excludeForked = !!this.config.excludeForked
     this.excludeGist = !!this.config.excludeGist
 
+    // XXX: `watch` が発火してしまうため、初期化判定を遅らせる
     _.defer(() =>
       this.initialized = true
     )
