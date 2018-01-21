@@ -10,7 +10,8 @@
   "dependencies": {
     "element-ui": "^2.0.3",
     "vue": "^2.5.3",
-    "vue-class-component": "^6.1.0"
+    "vue-class-component": "^6.1.0",
+    "vue-property-decorator": "^6.0.0"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.52",

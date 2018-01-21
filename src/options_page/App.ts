@@ -3,6 +3,8 @@
 import ElementUI from 'element-ui'
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import * as _ from 'lodash'
 
 import {
   Configuration,
@@ -25,6 +27,7 @@ export default class AppComponent extends Vue {
     ],
   }
 
+  public initialized = false
   public config = Configuration.empty()
   public pattern = Pattern.empty()
   public patterns: Pattern.T[] = []
@@ -33,9 +36,17 @@ export default class AppComponent extends Vue {
 
   public async mounted() {
     this.config = await loadConfigFromBackground()
+    if (DEBUG) {
+      console.log('loaded', this.config)
+    }
+
     this.patterns = this.config.exclude
-    this.excludeForked = this.config.excludeForked
-    this.excludeGist = this.config.excludeGist
+    this.excludeForked = !!this.config.excludeForked
+    this.excludeGist = !!this.config.excludeGist
+
+    _.defer(() =>
+      this.initialized = true
+    )
   }
 
   public submitForm(formName: string) {
@@ -59,6 +70,20 @@ export default class AppComponent extends Vue {
 
   public async handleDelete(index: number) {
     this.patterns.splice(index, 1)
+
+    await saveConfigForBackground(this.config)
+    if (DEBUG) {
+      console.log('saved', this.config)
+    }
+  }
+
+  @Watch('excludeForked')
+  @Watch('excludeGist')
+  public async handleCheckbox() {
+    if (!this.initialized) return
+
+    this.config.excludeForked = this.excludeForked
+    this.config.excludeGist = this.excludeGist
 
     await saveConfigForBackground(this.config)
     if (DEBUG) {

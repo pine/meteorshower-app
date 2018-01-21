@@ -6,8 +6,8 @@ import {
 export namespace Configuration {
   export declare interface T {
     exclude: Pattern.T[]
-    excludeForked: boolean
-    excludeGist: boolean
+    excludeForked?: boolean
+    excludeGist?: boolean
   }
 
   export function empty(): T {

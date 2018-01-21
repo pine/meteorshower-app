@@ -25,8 +25,10 @@ function checkStar(): boolean {
   return false
 }
 
-function getRepository(): Repository | null {
-  const pattern = /^https:\/\/(?:gist\.)?github\.com\/([^\/]+)\/([^\/]+)/
+function getRepository(excludeGist: boolean): Repository | null {
+  const pattern = excludeGist ?
+    /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)/ :
+    /^https:\/\/(?:gist\.)?github\.com\/([^\/]+)\/([^\/]+)/
   const matches = pattern.exec(location.href)
   return matches ? { owner: matches[1], name: matches[2] } : null
 }
@@ -55,7 +57,7 @@ async function main() {
     console.log('The config loaded', config)
   }
 
-  const repository = getRepository()
+  const repository = getRepository(!!config.excludeGist)
   if (!repository) return
   if (DEBUG) {
     console.log('A repository detected', repository)
