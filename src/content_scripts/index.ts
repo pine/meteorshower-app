@@ -5,6 +5,8 @@ import { loadConfigFromBackground, Pattern } from '../config'
 interface Repository {
   owner: string
   name: string
+  gist: boolean
+  forked: boolean
 }
 
 function checkStar(): boolean {
@@ -25,12 +27,14 @@ function checkStar(): boolean {
   return false
 }
 
-function getRepository(excludeGist: boolean): Repository | null {
-  const pattern = excludeGist ?
-    /^https:\/\/github\.com\/([^\/]+)\/([^\/]+)/ :
-    /^https:\/\/(?:gist\.)?github\.com\/([^\/]+)\/([^\/]+)/
+function getRepository(): Repository | null {
+  const pattern = /^https:\/\/((?:gist\.)?)github\.com\/([^\/]+)\/([^\/]+)/
   const matches = pattern.exec(location.href)
-  return matches ? { owner: matches[1], name: matches[2] } : null
+  if (!matches) return null
+
+  const gist = matches[1].length > 0
+  const forked = !!document.querySelector('.fork-flag')
+  return { owner: matches[2], name: matches[3], gist, forked }
 }
 
 function findMatchedPattern(
@@ -57,10 +61,22 @@ async function main() {
     console.log('The config loaded', config)
   }
 
-  const repository = getRepository(!!config.excludeGist)
+  const repository = getRepository()
   if (!repository) return
   if (DEBUG) {
     console.log('A repository detected', repository)
+  }
+
+  // Fork
+  if (config.excludeGist && repository.gist) {
+    console.log('The repository is gist')
+    return
+  }
+
+  // Gist
+  if (config.excludeForked && repository.forked) {
+    console.log('The repository has been forked')
+    return
   }
 
   const matchedPattern = findMatchedPattern(repository, config.exclude)
@@ -68,7 +84,6 @@ async function main() {
     console.log('The repository excluded by', matchedPattern)
     return
   }
-
   if (checkStar()) {
     console.log('The new star checked')
   } else {
