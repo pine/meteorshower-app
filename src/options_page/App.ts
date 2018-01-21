@@ -28,10 +28,14 @@ export default class AppComponent extends Vue {
   public config = Configuration.empty()
   public pattern = Pattern.empty()
   public patterns: Pattern.T[] = []
+  public excludeForked = false
+  public excludeGist = false
 
   public async mounted() {
     this.config = await loadConfigFromBackground()
     this.patterns = this.config.exclude
+    this.excludeForked = this.config.excludeForked
+    this.excludeGist = this.config.excludeGist
   }
 
   public submitForm(formName: string) {

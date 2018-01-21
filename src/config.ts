@@ -6,11 +6,15 @@ import {
 export namespace Configuration {
   export declare interface T {
     exclude: Pattern.T[]
+    excludeForked: boolean
+    excludeGist: boolean
   }
 
   export function empty(): T {
     return {
       exclude: [],
+      excludeForked: false,
+      excludeGist: false,
     }
   }
 }

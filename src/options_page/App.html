@@ -53,5 +53,7 @@
     </el-table>
 
     <h2>その他オプション</h2>
+     <el-checkbox v-model="excludeForked">fork されたレポジトリを除外する</el-checkbox>
+     <el-checkbox v-model="excludeGist">gist を除外する</el-checkbox>
   </el-main>
 </el-container>
