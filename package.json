@@ -10,6 +10,7 @@
   "dependencies": {
     "element-ui": "^2.0.3",
     "vue": "^2.5.3",
+    "lodash": "^4.17.4",
     "vue-class-component": "^6.1.0",
     "vue-property-decorator": "^6.0.0"
   },
@@ -41,7 +42,6 @@
     "gulp-util": "^3.0.8",
     "gulp-zip": "^4.0.0",
     "html-loader": "^0.5.1",
-    "lodash": "^4.17.4",
     "node-sass": "^4.6.0",
     "run-sequence": "^2.2.0",
     "sass-loader": "^6.0.6",
