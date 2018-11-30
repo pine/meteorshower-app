@@ -1,5 +1,7 @@
+'use strict'
+
 import * as fs from 'fs'
-import { exec } from 'child_process'
+import { spawn } from 'child_process'
 
 import * as gulp from 'gulp'
 import * as gutil from 'gulp-util'
@@ -22,7 +24,7 @@ interface PackageJSON {
   version: string;
 }
 const pkg: PackageJSON = JSON.parse(fs.readFileSync('./package.json').toString('utf-8'))
-const isWatch = process.argv.indexOf('watch') > -1
+const isDev = process.argv.includes('watch')
 
 
 // ----- assets ---------------------------------------------------------------
@@ -33,17 +35,17 @@ gulp.task('assets', () =>
 )
 
 gulp.task('assets-watch', () =>
-  gulp.watch('./assets/**/*', ['assets'])
+  gulp.watch('./assets/**/*', gulp.task('assets'))
 )
 
 
 // ----- clean ----------------------------------------------------------------
 
-gulp.task('clean', cb => {
+gulp.task('clean', cb =>
   del(['dist', '*.zip'])
     .then(() => cb())
     .catch(err => cb(err))
-})
+)
 
 
 // ----- manifest -------------------------------------------------------------
@@ -55,13 +57,13 @@ gulp.task('manifest', () =>
       version: pkg.version,
     }))
     .pipe(rename({ extname: '' }))
-    .pipe(_if(!isWatch, jsonminify()))
+    .pipe(_if(!isDev, jsonminify()))
     .pipe(gulp.dest('./dist'))
 )
 
-gulp.task('manifest-watch', () => {
-  gulp.watch('./src/manifest.json.mustache', ['manifest'])
-})
+gulp.task('manifest-watch', () =>
+  gulp.watch('./src/manifest.json.mustache', gulp.task('manifest'))
+)
 
 
 // ----- tslint ---------------------------------------------------------------
@@ -77,37 +79,26 @@ gulp.task('tslint', () =>
 // ----- webpack --------------------------------------------------------------
 
 function runWebpack(opts: string[], cb: (arg: any) => any) {
-  const defaults = [
-    '--colors',
-    '--display-chunks',
-  ]
-  if (!process.env.CI) {
-    defaults.push('--progress')
-  }
-  opts = _.union(opts, defaults)
-
   const message = 'Run webpack with options `' + opts.join(' ') + '`'
   gutil.log(message)
 
-  const cmd = 'webpack ' + opts.join(' ')
-  const child = exec(cmd, cb)
+  const child = spawn('webpack', opts)
   child.stdout.on('data', data => process.stdout.write(data))
   child.stderr.on('data', data => process.stderr.write(data))
+  child.on('close', cb)
 }
 
 
-gulp.task('webpack-prod', cb => {
+gulp.task('webpack-prod', cb =>
   runWebpack([], cb)
-})
+)
 
-gulp.task('webpack-watch', cb => {
-  runWebpack(['--watch'], cb)
-})
+gulp.task('webpack-watch', cb =>
+  runWebpack(['--watch', '--progress'], cb)
+)
 
 
 // ----- zip ------------------------------------------------------------------
-
-gulp.task('zip', ['zip.archive', 'zip.source'])
 
 gulp.task('zip.archive', () =>
   gulp.src('dist/**/*')
@@ -134,56 +125,45 @@ gulp.task('zip.source', () =>
     .pipe(gulp.dest('.'))
 )
 
+gulp.task('zip', gulp.parallel('zip.archive', 'zip.source'))
+
 
 // ----- for production -------------------------------------------------------
 
-gulp.task('build-prod', cb => {
-  runSequence(
-    'clean',
-    [
-      'assets',
-      'manifest',
-      'webpack-prod',
-    ],
-    'zip',
-    cb
-  )
-})
+gulp.task('build-prod', gulp.series(
+  'clean',
+  gulp.parallel(
+    'assets',
+    'manifest',
+    'webpack-prod',
+  ),
+  'zip',
+))
 
-gulp.task('default', ['build-prod'])
+gulp.task('default', gulp.task('build-prod'))
 
 
 // ----- for development ------------------------------------------------------
 
-gulp.task('build-watch', cb => {
-  runSequence(
-    [
-      'assets',
-      'manifest',
-    ],
-    cb
-  )
-})
+gulp.task('build-watch', gulp.series(
+  'assets',
+  'manifest',
+))
 
-gulp.task('watch', cb => {
-  runSequence(
-    'clean',
-    [
-      'build-watch',
-    ],
-    [
-      'assets-watch',
-      'manifest-watch',
-      'webpack-watch',
-    ],
-    cb
-  )
-})
+gulp.task('watch', gulp.series(
+  'clean',
+  'build-watch',
+  gulp.parallel(
+    'assets-watch',
+    'manifest-watch',
+    'webpack-watch',
+  ),
+))
 
 
 // ----- for test -------------------------------------------------------------
 
-gulp.task('test', ['tslint'])
+gulp.task('test', gulp.series('tslint'))
 
 
 // vim: se et ts=2 sw=2 sts=2 ft=typescript :
