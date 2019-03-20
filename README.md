@@ -1,4 +1,4 @@
-## Meteor Shower ☆彡 &nbsp;[![CircleCI](https://circleci.com/gh/meteor-sw/MeteorShower/tree/master.svg?style=shield)](https://circleci.com/gh/meteor-sw/MeteorShower/tree/master) [![Greenkeeper badge](https://badges.greenkeeper.io/pine/MeteorShower.svg)](https://greenkeeper.io/)
+## Meteor Shower ☆彡 &nbsp;[![CircleCI](https://circleci.com/gh/meteor-sw/browser-extension/tree/master.svg?style=shield)](https://circleci.com/gh/meteor-sw/browser-extension/tree/master) [![Greenkeeper badge](https://badges.greenkeeper.io/pine/MeteorShower.svg)](https://greenkeeper.io/)
 
 :star2: Do you remember all the repositories saw in the past?
 
