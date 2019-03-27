@@ -10,7 +10,7 @@
 ## Getting started
 
 ```
-$ git clone https://github.com/meteor-sw/MeteorShower.git
+$ git clone https://github.com/pine/meteorshower-app.git
 $ cd MeteorShower
 
 $ yarn
