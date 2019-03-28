@@ -14,7 +14,8 @@ function checkStar(): boolean {
   const unstarred = document.querySelector('.starring-container .unstarred')
   if (!starred || !unstarred) return false
 
-  const starredStyle = document.defaultView.getComputedStyle(starred, '')
+  const defaultView = document.defaultView || window
+  const starredStyle = defaultView.getComputedStyle(starred, '')
   const isStarred = starredStyle.display !== 'none'
 
   if (!isStarred) {

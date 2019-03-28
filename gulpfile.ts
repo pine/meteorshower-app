@@ -13,7 +13,7 @@ import * as jsonminify from 'gulp-jsonminify'
 import * as zip from 'gulp-zip'
 import tslint from 'gulp-tslint'
 
-import * as del from 'del'
+import del from 'del'
 import * as runSequence from 'run-sequence'
 import * as _ from 'lodash'
 
@@ -41,10 +41,8 @@ gulp.task('assets-watch', () =>
 
 // ----- clean ----------------------------------------------------------------
 
-gulp.task('clean', cb =>
-  del(['dist', '*.zip'])
-    .then(() => cb())
-    .catch(err => cb(err))
+gulp.task('clean', async () =>
+  await del(['dist', '*.zip'])
 )
 
 
