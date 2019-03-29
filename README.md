@@ -28,5 +28,9 @@ $ yarn run build # for production
 $ yarn test
 ```
 
+## See also
+
+- [meteorshower-server](https://github.com/pine/meteorshower-server)
+
 ## License
 MIT &copy; [Pine Mizune](https://profile.pine.moe)
