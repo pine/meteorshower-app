@@ -15,7 +15,7 @@
 
 ```
 $ git clone https://github.com/pine/meteorshower-app.git
-$ cd MeteorShower
+$ cd meteorshower-app
 
 $ yarn
 $ yarn start     # for development
