@@ -81,8 +81,12 @@ function runWebpack(opts: string[], cb: (arg: any) => any) {
   gutil.log(message)
 
   const child = spawn('webpack', opts)
-  child.stdout.on('data', data => process.stdout.write(data))
-  child.stderr.on('data', data => process.stderr.write(data))
+  if (child.stdout != null) {
+    child.stdout.on('data', data => process.stdout.write(data))
+  }
+  if (child.stderr != null) {
+    child.stderr.on('data', data => process.stderr.write(data))
+  }
   child.on('close', cb)
 }
 
