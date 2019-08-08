@@ -13,7 +13,7 @@ import * as jsonminify from 'gulp-jsonminify'
 import * as zip from 'gulp-zip'
 import tslint from 'gulp-tslint'
 
-import del from 'del'
+import * as del from 'del'
 import * as runSequence from 'run-sequence'
 import * as _ from 'lodash'
 
