@@ -32,7 +32,7 @@
     "@types/webpack": "^4.4.26",
     "css-loader": "^3.0.0",
     "del": "^5.0.0",
-    "file-loader": "^4.0.0",
+    "file-loader": "^5.0.0",
     "gulp": "^4.0.0",
     "gulp-if": "^3.0.0",
     "gulp-jsonminify": "^1.0.0",
