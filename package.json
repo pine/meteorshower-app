@@ -26,7 +26,7 @@
     "@types/gulp-util": "^3.0.33",
     "@types/gulp-zip": "^4.0.0",
     "@types/lodash": "^4.14.80",
-    "@types/node": "^12.0.0",
+    "@types/node": "^13.5.1",
     "@types/run-sequence": "^0.0.30",
     "@types/uglifyjs-webpack-plugin": "^1.1.0",
     "@types/webpack": "^4.4.26",
